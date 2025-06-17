@@ -1,5 +1,25 @@
 # SOF Flight Exporter
 
+## Table of Contents
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Quick Start](#quick-start)
+- [How to Run](#how-to-run)
+- [Example Output](#example-output)
+- [Code Walkthrough](#code-walkthrough)
+- [Error Handling](#error-handling)
+- [Dependencies](#dependencies)
+- [Build Configuration](#build-configuration)
+- [Output Files](#output-files)
+- [Extending the Project](#extending-the-project)
+- [Testing](#testing)
+- [Security](#security)
+- [Known Issues and Limitations](#known-issues-and-limitations)
+- [Contributing](#contributing)
+- [Future Improvements](#future-improvements)
+- [Troubleshooting](#troubleshooting)
+
 A Java application that authenticates with the Amadeus for Developers API and extracts flight data for Sofia Airport (SOF) for a specified 10-day interval after September 1, 2025.
 
 ## Features
@@ -78,6 +98,20 @@ if (apiKey == null || apiSecret == null) {
 }
 ```
 
+## Quick Start
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/1lmera/sof-flight.git
+   cd sof-flight
+   ```
+2. **Set your Amadeus API credentials** (see [Configuration](#configuration)).
+3. **Build and run:**
+   ```sh
+   mvn clean package
+   java -jar target/sofexporter-1.0.0.jar -from 2025-09-10 -to 2025-09-19
+   ```
+
 ## How to Run
 
 ### Prerequisites
@@ -102,6 +136,15 @@ java -jar target/sofexporter-1.0.0.jar -from 2025-09-10 -to 2025-09-19
 #### With Default Dates (10 days from today)
 ```bash
 java -jar target/sofexporter-1.0.0.jar
+```
+
+## Example Output
+
+Sample generated CSV (departures-SOF-2025-09-10-2025-09-19.csv):
+
+```
+carrierCode,flightNumber,origin,destination,scheduledDeparture,scheduledArrival,status,terminal,gate
+W6,1001,SOF,LON,2025-09-10T06:00:00,2025-09-10T08:30:00,SCHEDULED,2,A1
 ```
 
 ## Code Walkthrough
@@ -358,6 +401,33 @@ Each CSV file contains the following columns:
 - `status` - Flight status
 - `terminal` - Terminal number
 - `gate` - Gate number
+
+## Extending the Project
+
+- **Support other airports:** Change the airport code in the code or add a CLI argument.
+- **Add new columns:** Edit `CsvExporter.java` to include more fields.
+- **Integrate real Amadeus API:** Replace the sample data logic in `FlightService.java` with real API calls when the endpoint and SDK are confirmed.
+- **Add filters:** Add CLI options for airline, time, etc.
+
+## Testing
+
+To run (future) unit tests:
+```sh
+mvn test
+```
+
+## Security
+- API credentials are loaded from environment variables or `config.properties` (never commit secrets!).
+- Use a `.gitignore` to avoid committing sensitive files.
+
+## Known Issues and Limitations
+- Only sample data is generated (no real API integration yet)
+- Date range must be after September 1, 2025
+- No time zone support
+- No pagination for large datasets
+
+## Contributing
+Pull requests are welcome! Please open an issue first to discuss major changes.
 
 ## Future Improvements
 
