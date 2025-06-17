@@ -138,6 +138,98 @@ java -jar target/sofexporter-1.0.0.jar -from 2025-09-10 -to 2025-09-19
 java -jar target/sofexporter-1.0.0.jar
 ```
 
+## Command-Line Examples
+
+### Basic Usage Examples
+
+**1. Specific date range (most common):**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-09-15 -to 2025-09-24
+```
+*Generates: `departures-SOF-2025-09-15-2025-09-24.csv` and `arrivals-SOF-2025-09-15-2025-09-24.csv`*
+
+**2. Single day:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-09-20 -to 2025-09-20
+```
+*Generates: `departures-SOF-2025-09-20-2025-09-20.csv` and `arrivals-SOF-2025-09-20-2025-09-20.csv`*
+
+**3. Week-long period:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-10-01 -to 2025-10-07
+```
+*Generates: `departures-SOF-2025-10-01-2025-10-07.csv` and `arrivals-SOF-2025-10-01-2025-10-07.csv`*
+
+**4. Default behavior (no arguments):**
+```bash
+java -jar target/sofexporter-1.0.0.jar
+```
+*Uses today's date as start, generates 10-day range*
+
+**5. Only start date specified:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-11-01
+```
+*Uses 2025-11-01 as start, generates 10-day range ending 2025-11-10*
+
+### Advanced Examples
+
+**6. Long-term analysis (month):**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-12-01 -to 2025-12-31
+```
+*Generates: `departures-SOF-2025-12-01-2025-12-31.csv` and `arrivals-SOF-2025-12-01-2025-12-31.csv`*
+
+**7. Weekend analysis:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-09-13 -to 2025-09-14
+```
+*Generates files for weekend flights*
+
+**8. Holiday period:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-12-24 -to 2026-01-02
+```
+*Generates files for holiday travel period*
+
+### Error Examples
+
+**9. Invalid date format:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025/09/10 -to 2025/09/19
+```
+*Error: "Грешка при парсване на датите"*
+
+**10. Date before September 1, 2025:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-08-15 -to 2025-08-25
+```
+*Error: "Началната дата не може да е преди 01.09.2025"*
+
+**11. End date before start date:**
+```bash
+java -jar target/sofexporter-1.0.0.jar -from 2025-09-20 -to 2025-09-15
+```
+*Error: "Крайната дата не може да е преди началната!"*
+
+### Expected Output Examples
+
+**Successful run:**
+```bash
+$ java -jar target/sofexporter-1.0.0.jar -from 2025-09-10 -to 2025-09-19
+Fetching DEPARTURE flights for SOF from 2025-09-10 to 2025-09-19
+Testing API connection...
+Fetching ARRIVAL flights for SOF from 2025-09-10 to 2025-09-19
+Testing API connection...
+Готово! Файловете са записани.
+```
+
+**Error run:**
+```bash
+$ java -jar target/sofexporter-1.0.0.jar -from 2025-08-01 -to 2025-08-10
+Началната дата не може да е преди 01.09.2025
+```
+
 ## Example Output
 
 Sample generated CSV (departures-SOF-2025-09-10-2025-09-19.csv):
