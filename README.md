@@ -6,6 +6,7 @@
 - [Configuration](#configuration)
 - [Quick Start](#quick-start)
 - [How to Run](#how-to-run)
+- [Command-Line Examples](#command-line-examples)
 - [Example Output](#example-output)
 - [Code Walkthrough](#code-walkthrough)
 - [Error Handling](#error-handling)
