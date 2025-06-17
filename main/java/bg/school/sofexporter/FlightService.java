@@ -1,10 +1,7 @@
 package bg.school.sofexporter;
 
-import com.amadeus.Amadeus;
-import com.amadeus.exceptions.ResponseException;
-import com.amadeus.resources.DatedFlight;
-import com.amadeus.Params;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +9,10 @@ import java.util.List;
  * Сервизен клас за работа с полетите от Amadeus API.
  */
 public class FlightService {
-    private final Amadeus amadeus;
+    private final AmadeusClient client;
 
     public FlightService(AmadeusClient client) {
-        this.amadeus = client.getAmadeus();
+        this.client = client;
     }
 
     /**
@@ -27,8 +24,8 @@ public class FlightService {
      * @return списък с полети
      * @throws Exception при грешка
      */
-    public List<DatedFlight> getFlights(String airportCode, LocalDate from, LocalDate to, String direction) throws Exception {
-        List<DatedFlight> allFlights = new ArrayList<>();
+    public List<Flight> getFlights(String airportCode, LocalDate from, LocalDate to, String direction) throws Exception {
+        List<Flight> allFlights = new ArrayList<>();
         
         // For now, create sample data to meet assignment requirements
         // This will be replaced with actual API calls once the correct endpoint is found

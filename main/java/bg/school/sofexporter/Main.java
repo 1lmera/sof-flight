@@ -1,6 +1,5 @@
 package bg.school.sofexporter;
 
-import com.amadeus.resources.DatedFlight;
 import org.apache.commons.cli.*;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -52,8 +51,8 @@ public class Main {
             FlightService flightService = new FlightService(amadeusClient);
             CsvExporter exporter = new CsvExporter();
 
-            List<DatedFlight> departures = flightService.getFlights("SOF", from, to, "DEPARTURE");
-            List<DatedFlight> arrivals = flightService.getFlights("SOF", from, to, "ARRIVAL");
+            List<Flight> departures = flightService.getFlights("SOF", from, to, "DEPARTURE");
+            List<Flight> arrivals = flightService.getFlights("SOF", from, to, "ARRIVAL");
 
             String fromStr = from.toString();
             String toStr = to.toString();

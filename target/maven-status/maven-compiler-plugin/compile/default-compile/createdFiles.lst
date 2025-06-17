@@ -2,3 +2,4 @@ bg\school\sofexporter\FlightService.class
 bg\school\sofexporter\CsvExporter.class
 bg\school\sofexporter\AmadeusClient.class
 bg\school\sofexporter\Main.class
+bg\school\sofexporter\Flight.class

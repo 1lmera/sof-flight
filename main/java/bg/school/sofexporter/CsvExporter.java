@@ -1,6 +1,5 @@
 package bg.school.sofexporter;
 
-import com.amadeus.resources.DatedFlight;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +16,7 @@ public class CsvExporter {
             "scheduledDeparture","scheduledArrival","status","terminal","gate"
     };
 
-    public void export(List<DatedFlight> flights, Path path) throws IOException {
+    public void export(List<Flight> flights, Path path) throws IOException {
         try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
             pw.println(String.join(",", HEADER));
             
@@ -61,7 +60,7 @@ public class CsvExporter {
             } else {
                 // If we have real flight data, print it
                 System.out.println("Found " + flights.size() + " flights");
-                for (DatedFlight f : flights) {
+                for (Flight f : flights) {
                     System.out.println("Flight object: " + f);
                 }
             }
